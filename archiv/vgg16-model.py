@@ -2,8 +2,6 @@ import tensorflow as tf
 import pickle
 import numpy as np
 import matplotlib.pyplot as plt
-from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
-from sklearn.model_selection import train_test_split
 
 # load data
 pickle_in = open("X.pickle", "rb")
@@ -15,8 +13,6 @@ y = pickle.load(pickle_in)
 # data type
 X = np.array(X)
 y = np.array(y)
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42, test_size=0.2)
 
 # model creation
 model = tf.keras.Sequential([
@@ -60,7 +56,7 @@ model.compile(optimizer='adam',
               metrics=['accuracy'])
 
 # model training
-history = model.fit(X_train, y_train, epochs=20, validation_data=(X_test, y_test))
+history = model.fit(X, y, epochs=20, validation_split=0.2)
 
 model.save('vgg16-model.h5')
 
@@ -81,28 +77,3 @@ plt.xlabel('epoch')
 plt.legend(['train', 'val'], loc='upper left')
 plt.savefig('vgg16-loss2.jpg')
 plt.close()
-
-
-y_pred = model.predict(X_test)
-
-new_predictions = []
-for prediction in y_pred:
-    new_predictions.append(np.argmax(prediction))
-
-cm = tf.math.confusion_matrix(y_test, new_predictions)
-print(cm)
-
-
-
-'''
-print(model.evaluate(X_test, y_test))
-
-
-cm = confusion_matrix(y_test, new_predictions, labels=['0', '1', '2', '3', '4', '5', '6', '7'])
-print(cm)
-
-display = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=['0', '1', '2', '3', '4', '5', '6', '7'])
-display.plot()
-plt.show()
-
-'''
