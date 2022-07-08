@@ -29,8 +29,9 @@ class Plotter(object):
           sum_samples+=(sample-data_mean)**2
       deviation=np.sqrt(sum_samples/(len(data)-1))
       # 1.812 for 10 used samples from t table https://www.sjsu.edu/faculty/gerstman/StatPrimer/t-table.pdf
+      # 1.68 for 50 samples from https://faculty.washington.edu/heagerty/Books/Biostatistics/TABLES/t-Tables/
       ## ATTENTION change value for other sample numbers to get 95 % confidence intervall!!
-      confidence_intervall =  1.812 * deviation / (len(data))**(1/2)  
+      confidence_intervall =  1.68 * deviation / (len(data))**(1/2)  
 
       # Create Dictionary for further process
       data_dict[variable] = data_mean
