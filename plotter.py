@@ -57,7 +57,7 @@ class Plotter(object):
 
     plt.plot(epochs , test_loss , label = 'Validation Loss',color='orange')
     plt.fill_between(x_axis, test_loss+conf_test_loss, test_loss-conf_test_loss,color='orange', alpha=.1)
-    plt.title(data_description + ' Training and Validation Accuracy')
+    plt.title(data_description + ' Training and Validation Loss')
     plt.legend()
     plt.ylabel('Loss')
     plt.xlabel('Epochs')
