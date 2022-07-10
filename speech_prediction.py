@@ -1,16 +1,6 @@
 import argparse
 from speech_emotion_recognition_model import SpeechEmotion
 def parse_args():
-    # mujoco gym environments to train on
-    # https://www.gymlibrary.ml/pages/environments/mujoco/
-
-    #HalfCheetah-v3
-    #Ant-v3
-    #Walker2d-v3
-    #Hopper-v3
-    #InvertedPendulum-v2
-    #Humanoid-v3
-
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
     # speech emotion recognition parameters
