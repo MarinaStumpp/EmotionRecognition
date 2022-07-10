@@ -63,8 +63,8 @@ class SpeechEmotion(object):
             model.compile(optimizer = opt , loss = 'categorical_crossentropy' , metrics = ['accuracy'])
             model.summary()
             rlrp = ReduceLROnPlateau(monitor='loss', factor=0.5, verbose=1, patience=5, min_lr=0.0000001)
-            earlyStopping = EarlyStopping(monitor ="val_accuracy", mode = 'auto', patience =10, restore_best_weights = True)
-            history=model.fit(x_train, y_train, validation_data=(x_test,y_test), batch_size=64, epochs=self.epochs, callbacks=[rlrp, earlyStopping], shuffle=True)
+            #earlyStopping = EarlyStopping(monitor ="val_accuracy", mode = 'auto', patience =10, restore_best_weights = True)
+            history=model.fit(x_train, y_train, validation_data=(x_test,y_test), batch_size=64, epochs=self.epochs, callbacks=[rlrp], shuffle=True)
             plotting_data.append(history.history)
 
         model.save('speech-model.h5')
