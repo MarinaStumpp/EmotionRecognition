@@ -62,7 +62,7 @@ class Plotter(object):
     plt.legend()
     plt.ylabel('Loss')
     plt.xlabel('Epochs')
-    plt.savefig(data_description+'_Training_and_Validation_Loss.png')
+    plt.savefig('graphs/'+data_description+'_Training_and_Validation_Loss.png')
     plt.show()
 
     plt.plot(epochs , train_acc , label = 'Training Accuracy', color='blue')
@@ -73,7 +73,7 @@ class Plotter(object):
     plt.legend()
     plt.ylabel('Accuracy')
     plt.xlabel('Epochs')
-    plt.savefig(data_description+'_Training_and_Validation_Accuracy.png')
+    plt.savefig('graphs/'+data_description+'_Training_and_Validation_Accuracy.png')
     plt.show()
 
   def __init__(self, file_path, **kwargs):
@@ -92,7 +92,7 @@ class Plotter(object):
 def parse_args():
 
   parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-  parser.add_argument('--file_path', type=str, default='audio.dat')
+  parser.add_argument('--file_path', type=str, default='plotting_data/audio.dat')
   parser.add_argument('--data_description', type=str, default='')
   args = parser.parse_args()
   dict_args = vars(args)
