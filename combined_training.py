@@ -2,10 +2,12 @@ import tensorflow as tf
 from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 import pandas as pd
+from sklearn.utils import shuffle
 
 
 # load csv file
 df = pd.read_csv('predictions.csv')
+df = shuffle(df, random_state=42)
 
 
 # data type
@@ -14,7 +16,7 @@ y = df['label']
 
 
 # split data
-X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42, test_size=0.2)
+X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42, test_size=0.3)
 
 
 # model creation
@@ -34,7 +36,7 @@ model.compile(optimizer='adam',
 
 
 # model training
-history = model.fit(X_train, y_train, epochs=5, validation_data=(X_test, y_test))
+history = model.fit(X_train, y_train, epochs=10, validation_data=(X_test, y_test))
 
 model.save('combined-model.h5')
 

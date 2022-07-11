@@ -10,7 +10,7 @@ def process_video(video_dir):
     IMG_SIZE = 300
     loaded_images = []
     processed_images = []
-    model = tf.keras.models.load_model('../vgg16/vgg16-model.h5')
+    model = tf.keras.models.load_model('vgg16-model.h5')
     CATEGORIES = ["angry", "calm", "disgust", "fearful", "happy", "neutral", "sad", "surprised"]
 
     # get all images from mp4
