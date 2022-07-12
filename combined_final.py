@@ -30,7 +30,7 @@ if __name__ == "__main__":
     args = parse_args()
     model = tf.keras.models.load_model('combined-model.h5')
     CATEGORIES = ["angry", "calm", "disgust", "fearful", "happy", "neutral", "sad", "surprised"]
-    speech_emotion=SpeechEmotion()
+    speech_emotion=SpeechEmotion(**args)
 
     # load video
     video = "C:/Users/Philipp/Desktop/ER-Projekt/training_data/angry/01-01-05-01-01-01-05.mp4"
