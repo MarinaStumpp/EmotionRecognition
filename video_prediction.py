@@ -70,4 +70,4 @@ def process_video(video_dir):
 
 
 # processing of the video
-process_video("C:/Users/Philipp/Desktop/ER-Projekt/org-data/Actor_07/01-01-03-02-01-01-07.mp4")
+#process_video("C:/Users/Philipp/Desktop/ER-Projekt/org-data/Actor_07/01-01-03-02-01-01-07.mp4")

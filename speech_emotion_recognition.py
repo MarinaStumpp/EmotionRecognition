@@ -64,7 +64,8 @@ class SpeechEmotion(object):
         scaler = StandardScaler()
         audio_features = scaler.fit_transform(audio_features.reshape(-1, audio_features.shape[-1])).reshape(
             audio_features.shape)
-        return self.model.predict(audio_features)
+        model = tf.keras.models.load_model('speech_model.h5')
+        return model.predict(audio_features)
 
     # Create model and train
     def train_model(self, speech_model_type, **kwargs):
