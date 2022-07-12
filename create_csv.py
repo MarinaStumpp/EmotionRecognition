@@ -2,10 +2,12 @@ import pandas as pd
 import numpy as np
 from video_prediction import process_video
 import os
+from speech_emotion_recognition import SpeechEmotion
 
 
 # create an empty dataframe
 df = pd.DataFrame()
+speech_recognition = SpeechEmotion()
 
 
 # for each video file
@@ -15,17 +17,16 @@ for index, folder in enumerate(subfolders):
 
     # iterate all files in folder
     for filename in os.listdir(folder):
-        f = os.path.join(folder, filename)
+        video_path = os.path.join(folder, filename)
 
         # checking if it is a file
-        if os.path.isfile(f):
+        if os.path.isfile(video_path):
 
             # process video
-            video_prediction = process_video(f)
+            video_prediction = process_video(video_path)
 
             # process audio
-            # TODO change to process_audio()
-            audio_prediction = video_prediction
+            audio_prediction = speech_recognition.process_audio(video_path, ??audio_path??)
 
             # combine the outputs
             predictions = np.append(video_prediction, audio_prediction)
