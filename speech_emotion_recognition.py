@@ -102,7 +102,8 @@ class SpeechEmotion(object):
 
     # Get paths for data from mp4 data to mp3 data
     def preprocess_ravdess_data(self, **kwargs):
-        ravdess_directory_list = os.listdir(self.ravdess_path)
+        ravdess_path=self.ravdess_path
+        ravdess_directory_list = os.listdir(ravdess_path)
         file_emotion = []
         file_path = []
         for path in ravdess_directory_list:
@@ -112,11 +113,7 @@ class SpeechEmotion(object):
                 part = part.split('-')
                 # third part in each file represents the emotion associated to that file.
                 file_emotion.append(int(part[2]))
-                dir = 'speech_files' + '/' + path + '/' + file.split('.')[0] + '.wav'
-                if not os.path.exists(dir):
-                    dir = self.convert_video_to_audio(self.ravdess_path + '/' + path + '/' + file,
-                                                      'speech_files' + '/' + path + '/' + file, out_ext='wav', **kwargs)
-                file_path.append(dir)
+                file_path.append(ravdess_path+'/' +path + '/' + file)
 
         # dataframe for emotion of files
         emotion_df = pd.DataFrame(file_emotion, columns=['Emotions'])
@@ -280,7 +277,7 @@ class SpeechEmotion(object):
         model = keras.Model(inputs, outputs)
         return model
 
-    # Optimized Original Model
+    # Optimized Original Model - not used
     def create_test_speech_model(self, input_shape, **kwargs):
         inputs = keras.Input(shape=(input_shape))
 
@@ -348,7 +345,7 @@ class SpeechEmotion(object):
         model = keras.Model(inputs, outputs)
         return model
 
-    # Optimized LSTM model
+    # Optimized LSTM model - not used
     def create_LSTM_test_speech_model(self, input_shape, **kwargs):
         inputs = keras.Input(shape=(input_shape))
 
@@ -380,14 +377,14 @@ class SpeechEmotion(object):
 
         df.head(10)
         cm = confusion_matrix(y_test, y_pred)
-        cmn = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+        cmn = np.around(cm.astype('float') / cm.sum(axis=1)[:, np.newaxis], decimals=2)
         plt.figure(figsize=(12, 10))
         cmn = pd.DataFrame(cm, index=[i for i in encoder.categories_], columns=[i for i in encoder.categories_])
         sns.heatmap(cmn, linecolor='white', cmap='Blues', linewidth=1, annot=True, fmt='')
         plt.title('Confusion Matrix', size=20)
         plt.xlabel('Predicted Labels', size=14)
         plt.ylabel('Actual Labels', size=14)
-        plt.savefig('graphs/' + speech_model_type + 'confusion.png')
+        plt.savefig('graphs/' + speech_model_type + '_confusion.png')
         plt.show()
 
     def create_model(self, model_type, train_shape, **kwargs):
