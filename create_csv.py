@@ -5,6 +5,7 @@ import os
 from speech_emotion_recognition import SpeechEmotion
 import argparse
 
+
 def parse_args():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
