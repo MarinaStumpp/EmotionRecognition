@@ -47,11 +47,11 @@ def process_video(video_dir):
             if len(face_crop) != 1:
                 print('no face found')
             else:
-
                 # resize and append to training data
                 new_array = cv2.resize(face_crop[0], (IMG_SIZE, IMG_SIZE))
 
-                processed_images.append(new_array)  # add this to our training_data
+                # add this to our training_data
+                processed_images.append(new_array)
         except Exception as e:
             print("general exception", e)
 
@@ -67,7 +67,3 @@ def process_video(video_dir):
         means.append(float(statistics.mean([el[count] for el in predictions])))
 
     return means
-
-
-# processing of the video
-#process_video("C:/Users/Philipp/Desktop/ER-Projekt/org-data/Actor_07/01-01-03-02-01-01-07.mp4")
