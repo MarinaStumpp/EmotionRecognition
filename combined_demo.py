@@ -31,15 +31,13 @@ if __name__ == "__main__":
     speech_emotion = SpeechEmotion(**args)
 
     # load video
-    #video = "C:/Users/Philipp/Desktop/ER-Projekt/training_data/sad/01-01-04-01-01-01-01.mp4"
-    video = "C:/Users/Philipp/Desktop/test.mp4"
+    video = "demo_videos/angry/01-01-05-01-01-01-01.mp4"
 
     # process video
     video_prediction = process_video(video)
 
     # process audio
     audio_prediction = speech_emotion.process_audio(video, **args)
-    #audio_prediction = video_prediction
 
     # combine video and audio predictions
     predictions = np.append(video_prediction, audio_prediction)
@@ -48,6 +46,5 @@ if __name__ == "__main__":
     # use combined model for prediction
     predictions = model.predict(predictions)
 
-    print(predictions)
     # mean of list is the index of the category that was predicted in total
     print(f'Emotion Detected: {CATEGORIES[int(np.argmax(predictions))]}')

@@ -1,4 +1,4 @@
 .idea
 training_data
 test_data
-videos_temp
+__pycache__

@@ -31,14 +31,17 @@ def parse_args():
 if __name__ == "__main__":
 
     args = parse_args()
+
     # create an empty dataframe
     df = pd.DataFrame()
     speech_recognition = SpeechEmotion(**args)
 
+    # counter
     wrong_video_predictions = 0
     right_predictions = 0
 
     # for each video file
+    # change training_data to test_data for test data generation
     subfolders = [f.path for f in os.scandir('training_data') if f.is_dir()]
 
     for index, folder in enumerate(subfolders):
@@ -55,6 +58,7 @@ if __name__ == "__main__":
                 # process video
                 video_prediction = process_video(video_path)
 
+                # check if video prediction is correct
                 if int(np.argmax(video_prediction)) != index:
                     print("Error: Video prediction is not correct")
                     wrong_video_predictions += 1
@@ -81,4 +85,5 @@ if __name__ == "__main__":
                     right_predictions += 1
 
     # store the csv file
+    # change training_data to test_data for test data generation
     df.to_csv('training_data.csv', index=False)
